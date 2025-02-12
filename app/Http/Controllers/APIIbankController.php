@@ -71,6 +71,8 @@ class APIIbankController extends Controller
 
         if($prosesUpdate){
             return response()->json("Pin Updated!");
+        }else{
+
         }
 
 //        if($prosesUpdate){

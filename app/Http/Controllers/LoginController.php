@@ -23,10 +23,23 @@ class LoginController extends Controller
 
     public function viewLogin()
     {
-        if(!session('cif')){
-            return view("app.login");
+        if(session("ktp") && session('pin_ganti') == 0){
+            return view("app.update_pin");
+        } else if (session("ktp") && session('pin_ganti') != 0) {
+            return view("viewDashboard");
         }else{
-            return redirect()->route('viewDashboard');
+            return view("app.login");
+        }
+    }
+
+    public function viewUpdatePin()
+    {
+        if(session("ktp") && session('pin_ganti') == 0){
+            return view("app.update_pin");
+        } else if (session("ktp") && session('pin_ganti') != 0) {
+            return view("viewDashboard");
+        }else{
+            return view("app.login");
         }
     }
 
@@ -46,7 +59,8 @@ class LoginController extends Controller
                 session()->put('cif',$users->cif);
                 session()->put('ktp',$users->ktp);
                 session()->put('fullname',$users->nama);
-                $data = array("cif"=>$users->cif, "ktp" => $users->ktp, "fullname"=>$users->nama);
+                session()->put('pin_ganti',$users->pin_ganti);
+                $data = array("cif"=>$users->cif, "ktp" => $users->ktp, "fullname"=>$users->nama, "pin_ganti"=>$users->pin_ganti);
                 return response()->json($data);
             }
         } else {

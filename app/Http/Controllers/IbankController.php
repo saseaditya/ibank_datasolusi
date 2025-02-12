@@ -51,18 +51,19 @@ class IbankController extends Controller
     {
         $countPinUpdate = DB::table('ibank_nasabah')->select('pin_ganti')->where('cif',$id)->first();
 
-        $txtOldPin = $request->txtOldPin;
-        $txtNewPin = $request->txtNewPin;
+        $txtOldPin = @$_POST['txtOldPin'];
+        $txtNewPin = @$_POST['txtNewPin'];
 
         $getOldPin = DB::table('ibank_nasabah')->where('cif',$id)->where('pin',$txtOldPin)->first();
 
-        if ($getOldPin != null ) {
-            return response()->json("Pin Lama Salah!");
+        if ($getOldPin == null ) {
+            echo "Failed";
+            return;
         }
 
         $dataUpdate = [
             "pin" => $txtNewPin,
-            "pin_ganti" => $countPinUpdate + 1
+            "pin_ganti" => $countPinUpdate->pin_ganti + 1
         ];
 
         $prosesUpdate = DB::table('ibank_nasabah');
@@ -70,7 +71,9 @@ class IbankController extends Controller
         $msg = "Update ";
 
         if($prosesUpdate){
-            return response()->json("Pin Updated!");
+            echo "Success";
+        }else{
+            echo "Failed";
         }
 
 //        if($prosesUpdate){

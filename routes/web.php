@@ -28,7 +28,8 @@ Route::get('/proses_logout',[LoginController::class, 'prosesLogout'])->name('pro
 Route::get('/requestwhatsapp',[LoginController::class, 'RequestPINByWhatsApp'])->name('RequestPINByWhatsApp');
 
 
-Route::group(["middleware" => 'login'],function(){
+Route::middleware('login')->group(function(){
+    Route::get('/update_pin',[LoginController::class, 'viewUpdatePin'])->name('viewUpdatePin');
     Route::get('/nasabah/{cif}',[IbankController::class, 'viewMasterNasabah'])->name('viewMasterNasabah');
-    Route::put('/nasabah/{cif}',[IbankController::class, 'UpdatePinNasabah'])->name('UpdatePinNasabah');
+    Route::post('/nasabah/{cif?}',[IbankController::class, 'UpdatePinNasabah'])->name('UpdatePinNasabah');
 });

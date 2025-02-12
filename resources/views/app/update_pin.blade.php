@@ -5,7 +5,8 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/admin/img/tcp.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/admin/img/tcp.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title> Halaman Login </title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title> Halaman Update PIN </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -55,18 +56,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-                    <form id="LoginValidation" action="" method="">
+                    <form id="LoginValidation" action="" method="POST">
                         <div class="card card-profile text-center card-hidden full-width">
-{{--                            <div class="card-header ">--}}
-{{--                                <div class="card-avatar background-white padding-20">--}}
-{{--                                    <a href="#pablo">--}}
-{{--                                        <img class="img" src="{{ asset('assets/admin/img/tcp.png') }}">--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            <input type="hidden" id="cif" name="cif" value="{{session('cif')}}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            {{--                            <div class="card-header ">--}}
+                            {{--                                <div class="card-avatar background-white padding-20">--}}
+                            {{--                                    <a href="#pablo">--}}
+                            {{--                                        <img class="img" src="{{ asset('assets/admin/img/tcp.png') }}">--}}
+                            {{--                                    </a>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                             <div class="card-body ">
                                 <h4>
-                                    <p class="card-title text-center bold">Login Page</p>
+                                    <p class="card-title text-center bold">Update PIN</p>
                                 </h4>
                                 <div class="row">
                                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 no-padding-right xs-hide">
@@ -78,8 +81,8 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <div class="form-group">
-                                            <label for="exampleText" class="bmd-label-floating"> No. KTP *</label>
-                                            <input type="text" class="form-control" id="username" required="true" name="username" maxlength="16">
+                                            <label for="exampleText" class="bmd-label-floating"> PIN Lama *</label>
+                                            <input type="text" class="form-control" id="txtOldPin" required="true" name="txtOldPin" maxlength="6">
                                         </div>
                                     </div>
                                 </div>
@@ -93,24 +96,30 @@
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <div class="form-group">
-                                            <label for="examplePassword" class="bmd-label-floating"> PIN *</label>
-                                            <input type="password" class="form-control" id="password" required="true" name="password" maxlength="6">
+                                            <label for="examplePassword" class="bmd-label-floating"> PIN Baru *</label>
+                                            <input type="password" class="form-control" id="txtNewPin" required="true" name="txtNewPin" maxlength="6">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 no-padding-right xs-hide">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="material-icons margin-top-15">lock_outline</i>
+                                          </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <div class="form-group">
+                                            <label for="examplePassword" class="bmd-label-floating"> Konfimasi PIN *</label>
+                                            <input type="password" class="form-control" id="txtNewPin2" required="true" name="txtNewPin2" maxlength="6">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <p id="errorMessage" style="color: red; display: none;"></p>
                             <div class="card-footer justify-content-center no-padding-top">
-                                <button type="submit" class="btn btn-primary-red">Login</button>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 justify-content-center mb-1">
-                                    <div class="form-check">
-                                        <label class="">
-                                            Belum punya PIN ?
-                                            <a href="#" onclick="RequestPIN()">Minta PIN</a>.
-                                        </label>
-                                    </div>
-                                </div>
+                                <button type="submit" class="btn btn-primary-red">Update PIN</button>
                             </div>
                         </div>
                     </form>
@@ -177,6 +186,13 @@
             // after 1000 ms we add the class animated to the login/register card
             $('.card').removeClass('card-hidden');
         }, 700);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $("#LoginValidation").submit(function(event) {
             event.preventDefault();
             var isValid = true;
@@ -189,38 +205,74 @@
                 tryLogin();
             } else {}
         });
+
+        function validatePin() {
+            let newPin = $("#txtNewPin").val();
+            let confirmPin = $("#txtNewPin2").val();
+            let errorMessage = $("#errorMessage");
+            let submitButton = $("#LoginValidation button[type='submit']");
+
+            // Validasi panjang PIN
+            if (newPin.length != 6) {
+                errorMessage.text("PIN harus terdiri dari 6 digit.").show();
+                submitButton.prop("disabled", true);
+                return;
+            }
+
+            if (confirmPin !== "" && newPin !== confirmPin) {
+                errorMessage.text("PIN dan Konfirmasi PIN tidak cocok.").show();
+                submitButton.prop("disabled", true);
+            } else {
+                errorMessage.hide();
+                submitButton.prop("disabled", false);
+            }
+            // Validasi kesesuaian PIN dan Konfirmasi PIN
+        }
+
+        // Event untuk validasi saat mengetik di input "Konfirmasi PIN"
+        $("#txtNewPin2").on("input", function () {
+            validatePin();
+        });
+
+        // Event untuk validasi saat mengetik di input "PIN Baru"
+        $("#txtNewPin").on("input", function () {
+            validatePin();
+        });
     });
 </script>
 <script>
+
+
+
     function tryLogin() {
-        var user = $('#username').val();
-        var pass = $('#password').val();
+        var oldPin = $('#txtOldPin').val();
+        var newPin = $('#txtNewPin').val();
+        var confirmPin = $('#txtNewPin2').val();
+        var cif = $('#cif').val();
+
+
         $.ajax({
-            type: "GET",
-            url: "{{ route('prosesLogin') }}",
+            type: "POST",
+            url: "{{ route('UpdatePinNasabah') }}/"+cif,
             data: {
-                'ktp': user,
-                'pin': pass
+                'txtOldPin': oldPin,
+                'txtNewPin': confirmPin
             },
             success: function(response) {
                 if (response != "Failed") {
                     swal({
-                        title: "Hello " + response.fullname,
+                        title: "Update PIN Berhasil",
                         text: "Have a nice day!",
                         buttonsStyling: false,
                         confirmButtonClass: "btn btn-success",
                         type: "success"
                     }).catch(swal.noop).then((value) => {
-                        if (response.pin_ganti != 0) {
-                            window.location = ('./dashbard');
-                        }else{
-                            window.location = ('./update_pin');
-                        }
+                        window.location = ('./dashboard');
                     });
                 } else {
                     swal({
                         title: "Oops!",
-                        text: "No KTP / PIN Salah!",
+                        text: "Gagal Update PIN!",
                         buttonsStyling: false,
                         confirmButtonClass: "btn btn-success",
                         type: "error"
@@ -228,36 +280,6 @@
                 }
             }
         });
-    }
-
-    function RequestPIN() {
-        var user = $('#username').val();
-        if (user == "" ) {
-            swal({
-                title: "Oops!",
-                text: "Mohon masukan No KTP terlebih dahulu.",
-                buttonsStyling: false,
-                confirmButtonClass: "btn btn-success",
-                type: "error"
-            }).catch(swal.noop);
-        }else {
-            $.ajax({
-                type: "GET",
-                url: "{{ route('RequestPINByWhatsApp') }}",
-                data: {
-                    'ktp': user,
-                },
-                success: function (response) {
-                    swal({
-                        title: "Success Kirim PIN ke WA Anda!",
-                        text: "Mohon check WA Anda!",
-                        buttonsStyling: false,
-                        confirmButtonClass: "btn btn-success",
-                        type: "success"
-                    }).catch(swal.noop);
-                }
-            });
-        }
     }
 
     function setFormValidation(id) {

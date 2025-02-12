@@ -13,6 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        $middleware->group('login', [
+            \App\Http\Middleware\YourMiddleware::class,
+        ]);
+
+        // Middleware untuk route tertentu
+//        $middleware->alias('login', YourMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
