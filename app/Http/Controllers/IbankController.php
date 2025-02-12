@@ -27,24 +27,24 @@ class IbankController extends Controller
     //
     public function viewMasterNasabah(Request $request, $id = null)
     {
-        $viewPage = "admin.content.produk.index";
-        $page	= ["Home","Daftar Produk"];
+        $viewPage = "app.dashboard.index";
+        $page	= ["Home","Dashboard"];
 
         $data = DB::table('ibank_nasabah')->where('cif',$id)->first();
 
-        if ( $data->pin_ganti == 0 ) {
+        $dataPinjaman = DB::table('ibank_pinjaman')->where('cif',$id)->get();
+        $dataDeposito = DB::table('ibank_deposito')->where('cif',$id)->get();
+        $dataTabungan = DB::table('ibank_tabungan')->where('cif',$id)->get();
 
-            return response()->json("Update Pin");
-        }
 
-        return response()->json($data);
-
-//        $data = $data->orderBy('Name', 'ASC')->get();
-//        return view($viewPage,array(
-//            'pageNow' 	 	=> $page,
-//            'data' 	 	    => $data,
-//            'menuActive' 	=> "master_produk"
-//        ));
+        return view($viewPage,array(
+            'pageNow' 	 	=> $page,
+            'data' 	 	    => $data,
+            'dataPinjaman'  => $dataPinjaman,
+            'dataDeposito'  => $dataDeposito,
+            'dataTabungan'  => $dataTabungan,
+            'menuActive' 	=> "dasbor"
+        ));
     }
 
     public function UpdatePinNasabah(Request $request, $id = null)

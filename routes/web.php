@@ -30,6 +30,6 @@ Route::get('/requestwhatsapp',[LoginController::class, 'RequestPINByWhatsApp'])-
 
 Route::middleware('login')->group(function(){
     Route::get('/update_pin',[LoginController::class, 'viewUpdatePin'])->name('viewUpdatePin');
-    Route::get('/nasabah/{cif}',[IbankController::class, 'viewMasterNasabah'])->name('viewMasterNasabah');
+    Route::get('/dashboard/{cif?}',[IbankController::class, 'viewMasterNasabah'])->name('viewDashboard');
     Route::post('/nasabah/{cif?}',[IbankController::class, 'UpdatePinNasabah'])->name('UpdatePinNasabah');
 });

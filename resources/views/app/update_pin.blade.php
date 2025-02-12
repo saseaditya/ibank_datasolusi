@@ -267,7 +267,7 @@
                         confirmButtonClass: "btn btn-success",
                         type: "success"
                     }).catch(swal.noop).then((value) => {
-                        window.location = ('./dashboard');
+                        window.location = ('./dashboard/'+"{{session('cif')}}");
                     });
                 } else {
                     swal({
