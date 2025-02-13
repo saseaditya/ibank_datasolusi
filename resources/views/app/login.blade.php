@@ -212,7 +212,7 @@
                         type: "success"
                     }).catch(swal.noop).then((value) => {
                         if (response.pin_ganti != 0) {
-                            window.location = ('./dashbard');
+                            window.location = ('./dashboard');
                         }else{
                             window.location = ('./update_pin');
                         }

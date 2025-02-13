@@ -21,6 +21,7 @@ use HelperData;
 use App\PDFGenerate;
 use Dompdf\Dompdf;
 use PDF;
+use DateTime;
 
 class IbankController extends Controller
 {
@@ -30,11 +31,22 @@ class IbankController extends Controller
         $viewPage = "app.dashboard.index";
         $page	= ["Home","Dashboard"];
 
-        $data = DB::table('ibank_nasabah')->where('cif',$id)->first();
 
-        $dataPinjaman = DB::table('ibank_pinjaman')->where('cif',$id)->get();
-        $dataDeposito = DB::table('ibank_deposito')->where('cif',$id)->get();
-        $dataTabungan = DB::table('ibank_tabungan')->where('cif',$id)->get();
+        $data = DB::table('ibank_nasabah')->where('cif',session("cif"))->first();
+
+        $dataPinjaman = DB::table('ibank_pinjaman')->where('cif',session("cif"))->get();
+        $dataDeposito = DB::table('ibank_deposito')->where('cif',10002026)->get();
+        $dataTabungan = DB::table('ibank_tabungan')->where('cif',session("cif"))->get();
+
+        foreach ($dataTabungan as $tmp) {
+            $tglBuka = DateTime::createFromFormat('d/m/Y', $tmp->tgl_buka);
+            $tglValuta = DateTime::createFromFormat('d/m/Y', $tmp->tgl_valuta);
+            $tglJT = DateTime::createFromFormat('d/m/Y', $tmp->tgl_jth_tempo);
+
+            $tmp->tgl_buka = $tglBuka->format('d M Y');
+            $tmp->tgl_valuta = $tglValuta->format('d M Y');
+            $tmp->tgl_jth_tempo = $tglJT->format('d M Y');
+        }
 
 
         return view($viewPage,array(
@@ -49,12 +61,12 @@ class IbankController extends Controller
 
     public function UpdatePinNasabah(Request $request, $id = null)
     {
-        $countPinUpdate = DB::table('ibank_nasabah')->select('pin_ganti')->where('cif',$id)->first();
+        $countPinUpdate = DB::table('ibank_nasabah')->select('pin_ganti')->where('cif',session("cif"))->first();
 
         $txtOldPin = @$_POST['txtOldPin'];
         $txtNewPin = @$_POST['txtNewPin'];
 
-        $getOldPin = DB::table('ibank_nasabah')->where('cif',$id)->where('pin',$txtOldPin)->first();
+        $getOldPin = DB::table('ibank_nasabah')->where('cif',session("cif"))->where('pin',$txtOldPin)->first();
 
         if ($getOldPin == null ) {
             echo "Failed";
@@ -67,7 +79,7 @@ class IbankController extends Controller
         ];
 
         $prosesUpdate = DB::table('ibank_nasabah');
-        $prosesUpdate = $prosesUpdate->where('cif',$id)->update($dataUpdate);
+        $prosesUpdate = $prosesUpdate->where('cif',session("cif"))->update($dataUpdate);
         $msg = "Update ";
 
         if($prosesUpdate){

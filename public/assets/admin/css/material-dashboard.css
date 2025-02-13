@@ -15835,6 +15835,7 @@ thead.thead-inverse th,
 
 .card .table tr:first-child td {
   border-top: none;
+    padding: 0px;
 }
 
 .card .card-title {

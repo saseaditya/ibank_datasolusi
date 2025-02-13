@@ -23,10 +23,12 @@ class LoginController extends Controller
 
     public function viewLogin()
     {
-        if(session("ktp") && session('pin_ganti') == 0){
-            return view("app.update_pin");
-        } else if (session("ktp") && session('pin_ganti') != 0) {
-            return view("viewDashboard");
+        if(session("cif")){
+            if(session("ktp") && session('pin_ganti') == 0){
+                return view("app.update_pin");
+            } else if (session("ktp") && session('pin_ganti') != 0) {
+                return redirect('/dashboard');
+            }
         }else{
             return view("app.login");
         }
@@ -34,10 +36,12 @@ class LoginController extends Controller
 
     public function viewUpdatePin()
     {
-        if(session("ktp") && session('pin_ganti') == 0){
-            return view("app.update_pin");
-        } else if (session("ktp") && session('pin_ganti') != 0) {
-            return view("viewDashboard");
+        if(session("cif")){
+            if(session("ktp") && session('pin_ganti') == 0){
+                return view("app.update_pin");
+            } else if (session("ktp") && session('pin_ganti') != 0) {
+                return redirect('/dashboard');
+            }
         }else{
             return view("app.login");
         }
@@ -90,10 +94,12 @@ class LoginController extends Controller
 
         if(session('cif')) {
             session()->forget('cif');
-            return redirect('/login');
+//            session()->forget('ktp');
+//            session()->forget('pin_ganti');
+            return redirect('/');
         } else {
             echo 'Unknown Session';
-            return redirect('/login');
+            return redirect('/');
         }
     }
 }
