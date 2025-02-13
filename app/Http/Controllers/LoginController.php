@@ -17,6 +17,7 @@ use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
+use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
@@ -80,11 +81,11 @@ class LoginController extends Controller
             ->where('in.ktp', $ktp)
             ->first();
 
-        $hp = "081249971861";
-//        $hp = $Users->hp;
+//        $hp = "081249971861";
+        $hp = $Users->hp;
         $url = "http://36.95.139.41/chat-api/public/datasolusi/sendwa/6281343890809/".$hp."/".$Users->pin;
 
-        $response = Http::post($url);
+        $response = Http::get($url);
 
         return $response->json();
     }

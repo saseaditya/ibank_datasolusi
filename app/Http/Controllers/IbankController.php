@@ -35,10 +35,10 @@ class IbankController extends Controller
         $data = DB::table('ibank_nasabah')->where('cif',session("cif"))->first();
 
         $dataPinjaman = DB::table('ibank_pinjaman')->where('cif',session("cif"))->get();
-        $dataDeposito = DB::table('ibank_deposito')->where('cif',10002026)->get();
+        $dataDeposito = DB::table('ibank_deposito')->where('cif',session("cif"))->get();
         $dataTabungan = DB::table('ibank_tabungan')->where('cif',session("cif"))->get();
 
-        foreach ($dataTabungan as $tmp) {
+        foreach ($dataDeposito as $tmp) {
             $tglBuka = DateTime::createFromFormat('d/m/Y', $tmp->tgl_buka);
             $tglValuta = DateTime::createFromFormat('d/m/Y', $tmp->tgl_valuta);
             $tglJT = DateTime::createFromFormat('d/m/Y', $tmp->tgl_jth_tempo);
@@ -93,5 +93,29 @@ class IbankController extends Controller
 //        }else{
 //            return redirect()->back()->with('message', $msg.'Gagal')->with('message_status', 'danger');
 //        }
+    }
+
+    public function GetTrxPinjamanByRekening(Request $request)
+    {
+        $norek = @$_GET['norek'];
+        $dataPinjaman = DB::table('ibank_pinjaman_trx')->where('norekening',$norek)->get();
+
+        return response()->json($dataPinjaman);
+    }
+
+    public function GetTrxDepositoByRekening(Request $request)
+    {
+        $norek = @$_GET['norek'];
+        $dataDeposito = DB::table('ibank_deposito_trx')->where('norekening',$norek)->get();
+
+        return response()->json($dataDeposito);
+    }
+
+    public function GetTrxTabunganByRekening(Request $request)
+    {
+        $norek = @$_GET['norek'];
+        $dataTabungan = DB::table('ibank_tabungan_trx')->where('norekening',$norek)->get();
+
+        return response()->json($dataTabungan);
     }
 }

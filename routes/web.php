@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IbankController;
+use App\Http\Controllers\APIIbankController;
 use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
@@ -33,3 +34,9 @@ Route::middleware('login')->group(function(){
     Route::get('/dashboard',[IbankController::class, 'viewMasterNasabah'])->name('viewDashboard');
     Route::post('/nasabah',[IbankController::class, 'UpdatePinNasabah'])->name('UpdatePinNasabah');
 });
+
+// Ajax
+Route::get('/getTrxTabungan',[IbankController::class, 'GetTrxTabunganByRekening'])->name('GetTrxTabunganByRekening');
+Route::get('/getTrxPinjaman',[IbankController::class, 'GetTrxPinjamanByRekening'])->name('GetTrxPinjamanByRekening');
+Route::get('/getTrxDeposito',[IbankController::class, 'GetTrxDepositoByRekening'])->name('GetTrxDepositoByRekening');
+

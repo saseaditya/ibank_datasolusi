@@ -3,6 +3,8 @@
 @section('title','Dasbor')
 
 @section('content')
+    @include('app.dashboard.modal')
+
 <div class="content">
   <div class="container-fluid">
   	<div class="row">
@@ -57,16 +59,137 @@
             </div>
         </div>
     </div>
-      @include('app.dashboard.tab_penjualan')
+      @include('app.dashboard.table')
+
   </div>
 </div>
 @endsection
 @section('additionalCSS')
 <style type="text/css">
+    #overlay-table {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9); /* Warna background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        z-index: 9999; /* Pastikan di atas elemen lain */
+        display: none;
+    }
 
+    /* Animasi Spinner */
+    .loader {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #ccc;
+        border-top-color: #007bff; /* Warna utama */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    /* Keyframes untuk animasi */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 </style>
 @endsection
 @section('additionalJS')
 <script type="text/javascript">
+    $(document).ready(function() {
+
+        $(document).ajaxStart(function() {
+            $("#overlay-table").fadeIn(); // Tampilkan loader saat AJAX dimulai
+        });
+
+        $(document).ajaxStop(function() {
+            $("#overlay-table").fadeOut(); // Sembunyikan loader setelah AJAX selesai
+        });
+
+        $('body').on('click', '.btnTabungan', function () {
+            var id = $(this).data("id");
+
+            $.ajax({
+                url : "{{ route('GetTrxTabunganByRekening') }}",
+                type : "GET",
+                data : { norek : id },
+                // beforeSend: function() {
+                //     $('#overlay-table').show(); // Menampilkan loader sebelum data dimuat
+                // },
+                success : function(data){
+                    var output = '';
+                    var no = 0;
+
+                    $('table#tableTrxTabungan').DataTable().clear().draw();
+                    for(var count = 0; count < data.length; count++)
+                    {
+                        var d = data[count];
+                        no = no + 1;
+                        var dt = $('table#tableTrxTabungan').DataTable().row.add([no,d.norekening,d.tanggal,d.keterangan,"Rp. "+d.debet,"Rp. "+d.kredit,"Rp. "+d.saldo]);
+                        dt.draw().nodes().to$().find('td').filter((index) => [4, 5, 6].includes(index)).addClass( 'text-right' ).css('width', '15%' );
+                        dt.draw().nodes().to$().find('td').eq(2).addClass('text-center').css('width', '12%' );
+                        dt.draw().nodes().to$().find('td').eq(1).addClass('text-center').css('width', '12%' );
+                        dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
+                    }
+                    $('#modalTrxTabungan').modal('show');
+                    // $('#overlay').hide();
+
+                }
+            });
+        });
+
+        $('body').on('click', '.btnPinjaman', function () {
+            var id = $(this).data("id");
+            $('#modalTrxPinjaman').modal('show');
+            $.ajax({
+                url : "{{ route('GetTrxPinjamanByRekening') }}",
+                type : "GET",
+                data : { norek : id },
+                success : function(data){
+                    var output = '';
+                    var no = 0;
+
+                    $('table#tableTrxPinjaman').DataTable().clear().draw();
+                    for(var count = 0; count < data.length; count++)
+                    {
+                        var d = data[count];
+                        no = no + 1;
+                        var dt = $('table#tableTrxPinjaman').DataTable().row.add([no,d.norekening,d.tanggal,d.jadwal,d.keterangan,"Rp. "+d.realisasi,"Rp. "+d.ang_pokok,"Rp. "+d.sld_pokok,"Rp. "+d.bunga,"Rp. "+d.denda]);
+                        dt.draw().nodes().to$().find('td').filter((index) => [5, 6, 7, 8, 9].includes(index)).addClass( 'text-right' );
+                        dt.draw().nodes().to$().find('td').filter((index) => [1, 2, 3].includes(index)).css('width', '10%' );
+                        dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
+                    }
+                }
+            });
+        });
+
+        $('body').on('click', '.btnDeposito', function () {
+            var id = $(this).data("id");
+            $('#modalTrxDeposito').modal('show');
+            $.ajax({
+                url : "{{ route('GetTrxDepositoByRekening') }}",
+                type : "GET",
+                data : { norek : id },
+                success : function(data){
+                    var output = '';
+                    var no = 0;
+
+                    $('table#tableTrxDeposito').DataTable().clear().draw();
+                    for(var count = 0; count < data.length; count++)
+                    {
+                        var d = data[count];
+                        no = no + 1;
+                        var dt = $('table#tableTrxDeposito').DataTable().row.add([no,d.norekening,d.tanggal,d.jadwal,d.keterangan,"Rp. "+d.pokok,"Rp. "+d.bunga]);
+                        dt.draw().nodes().to$().find('td').filter((index) => [5,6].includes(index)).addClass( 'text-right' ).css('width', '15%' );
+                        dt.draw().nodes().to$().find('td').filter((index) => [1,2,3].includes(index)).addClass( 'text-center' ).css('width', '12%' );
+                        dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
+                    }
+                }
+            });
+        });
+    })
 </script>
 @endsection

@@ -120,6 +120,7 @@ class APIIbankController extends Controller
 
     public function GetTrxTabunganByRekening(Request $request, $norek = null)
     {
+
         $dataTabungan = DB::table('ibank_tabungan_trx')->where('norekening',$norek)->get();
 
         return response()->json($dataTabungan);

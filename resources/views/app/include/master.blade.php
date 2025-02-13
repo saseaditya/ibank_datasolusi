@@ -30,6 +30,9 @@
   @yield('additionalCSS')
 </head>
 <body class="">
+    <div id="overlay-table">
+        <div class="loader"></div>
+    </div>
   <div class="wrapper ">
     <div class="modal fade modal-mini modal-primary" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-small">
@@ -119,14 +122,15 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      @yield('content')
+        @yield('content')
+
 
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="float-left">
                     <ul>
                         <li>
-                            <a >
+                            <a>
                                 Web Version v1.0.4
                             </a>
                         </li>
