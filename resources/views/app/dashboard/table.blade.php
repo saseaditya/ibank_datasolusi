@@ -12,7 +12,7 @@
                 <div class="material-datatables">
                     <table id="dataList" class="table dataTables table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead class="bold">
-                            <th class="text-center">ID</th>
+                            <th class="text-center ">ID</th>
                             <th class="text-center">No Rekening</th>
                             <th class="text-center">Plafond</th>
                             <th class="text-center">Bakidebet</th>

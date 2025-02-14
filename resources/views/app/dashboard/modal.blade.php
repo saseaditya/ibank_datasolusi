@@ -16,7 +16,7 @@
                             <thead class="bold">
                             <tr>
                                 <th class="disabled-sorting">No</th>
-                                <th class="">NoRekening</th>
+{{--                                <th class="">NoRekening</th>--}}
                                 <th class="">Tanggal</th>
                                 <th class="">Jadwal</th>
                                 <th class="">Keterangan</th>
@@ -60,9 +60,10 @@
                             <thead class="bold">
                             <tr>
                                 <th class="disabled-sorting text-center">No</th>
-                                <th class="text-center">No.Rekening</th>
+{{--                                <th class="text-center">No.Rekening</th>--}}
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Keterangan</th>
+                                <th class="text-center">Sandi</th>
                                 <th class="text-center" style="width:15%">Debet</th>
                                 <th class="text-center" style="width:15%">Kredit</th>
                                 <th class="text-center" style="width:15%">Saldo</th>
@@ -100,8 +101,8 @@
                         <table id="tableTrxDeposito" class="table table-striped table-no-bordered table-hover dataTables" cellspacing="0" width="100%" style="width:100%">
                             <thead class="bold">
                             <tr>
-                                <th class="disabled-sorting text-center">No</th>
-                                <th class="text-center">No.Rekening</th>
+                                <th class="text-center">No</th>
+{{--                                <th class="text-center">No.Rekening</th>--}}
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Jadwal</th>
                                 <th class="text-center">Keterangan</th>

@@ -212,7 +212,7 @@
 /* ============================================================ START DROPDOWN ===========================================================*/
 .dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a:active, .dropdown-menu a.selected {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
-  background-color: darkgoldenrod !important;
+  background-color: #a51d1e !important;
   color: #fff !important;
 }
 #dropdownNotif{
@@ -261,7 +261,7 @@ ul.pagination>li {
     color: #6c757d;
 }
 .breadcrumb-item.active {
-    color: darkgoldenrod;
+    color: #a51d1e;
 }
 /* ============================================================ END BREADCRUMB ============================================================= */
 /* ============================================================= START TABEL =============================================================*/

@@ -13485,10 +13485,10 @@ fieldset[disabled] .form-group .form-control {
 .pagination>.page-item.active>span,
 .pagination>.page-item.active>span:focus,
 .pagination>.page-item.active>span:hover {
-  background-color: #006699;
-  border-color: #006699;
+  background-color: #a51d1e;
+  border-color: #a51d1e;
   color: #fff;
-  box-shadow: 0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12), 0 2px 4px -1px rgba(156, 39, 176, 0.2);
+  box-shadow:  0 4px 5px 0 rgb(165 29 30 / 0%), 0 1px 10px 0 rgb(165 29 30 / 0%), 0 2px 4px -1px rgb(165 29 30);
 }
 
 .pagination.pagination-info>.page-item.active>a,
@@ -15688,7 +15688,7 @@ thead.thead-inverse th,
 .card.bg-danger,
 .card.card-rotate.bg-danger .front,
 .card.card-rotate.bg-danger .back {
-  background: linear-gradient(60deg, #b8860b, #b8860b);
+  background: linear-gradient(60deg, #a51d1e, #a51d1e);
 }
 
 .card .card-header-rose .card-icon,
