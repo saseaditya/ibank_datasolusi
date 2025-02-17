@@ -239,25 +239,62 @@
                 buttonsStyling: false,
                 confirmButtonClass: "btn btn-success",
                 type: "error"
-            }).catch(swal.noop);
+            });
         }else {
             $.ajax({
                 type: "GET",
-                url: "{{ route('RequestPINByWhatsApp') }}",
+                url: "{{ route('checkUser') }}",
                 data: {
                     'ktp': user,
                 },
                 success: function (response) {
-                    swal({
-                        title: "Success Kirim PIN ke WA Anda!",
-                        text: "Mohon check WA Anda!",
-                        buttonsStyling: false,
-                        confirmButtonClass: "btn btn-success",
-                        type: "success"
-                    }).catch(swal.noop);
+                    if (response == "user not found") {
+                        swal({
+                            title: "Oops!",
+                            text: "Data tidak di temukan! Mohon hubungi cusomer service. Terimakasih",
+                            buttonsStyling: false,
+                            confirmButtonClass: "btn btn-success",
+                            type: "error"
+                        });
+                    } else {
+                        var noHp = maskPhoneNumber(response.hp);
+                        swal({
+                            title: "PIN akan dikirim melalui whatsapp ke nomor :" + noHp,
+                            text: "Apabila nomor tersebut bukan no HP anda, batalkan dan segera hubungi Customer Service Officer kami.",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#ea3729',
+                            confirmButtonText: 'Lanjut',
+                            cancelButtonText: 'Batal!',
+                            reverseButtons: true
+                        }).then((willConfirm) => {
+                            if (willConfirm.value) {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "{{ route('RequestPINByWhatsApp') }}",
+                                    data: {
+                                        'ktp': user,
+                                    },
+                                    success: function (response) {
+                                        if(response.status_code != 200) {
+                                            swal("Berhasil!", "PIN telah di kirim ke Whatsapp.", "success");
+                                        }else{
+                                            swal("Gagal Kirim PIN!", "Whatsapp sedangn bermasalah, coba lagi nanti!", "success");
+                                        }
+                                    }
+                                });
+                            } else {
+                                swal("Dibatalkan", "PIN Batal di kirim.", "error");
+                            }
+                        });
+                    }
                 }
             });
         }
+    }
+
+    function maskPhoneNumber(phoneNumber) {
+        return phoneNumber.slice(0, -4).replace(/\d/g, '*') + phoneNumber.slice(-4);
     }
 
     function setFormValidation(id) {
