@@ -51,7 +51,7 @@
 </nav>
 <!-- End Navbar -->
 <div class="wrapper wrapper-full-page">
-    <div class="page-header lock-page header-filter" style="background-image: url('../../assets/admin/img/lock.jpg')">
+    <div class="page-header lock-page header-filter" style="background-image: url('../../assets/admin/img/backGroundImgURL.jpg')">
         <!--   you can change the color of the filter page using: data-color="blue | green | orange | red | purple" -->
         <div class="container">
             <div class="row">
@@ -253,7 +253,7 @@
 
         $.ajax({
             type: "POST",
-            url: "{{ route('UpdatePinNasabah') }}/"+cif,
+            url: "{{ route('UpdatePinNasabah') }}",
             data: {
                 'txtOldPin': oldPin,
                 'txtNewPin': confirmPin
@@ -267,7 +267,7 @@
                         confirmButtonClass: "btn btn-success",
                         type: "success"
                     }).catch(swal.noop).then((value) => {
-                        window.location = ('./dashboard/'+"{{session('cif')}}");
+                        window.location = ('./dashboard');
                     });
                 } else {
                     swal({

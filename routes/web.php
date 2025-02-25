@@ -27,7 +27,7 @@ Route::get('/',[LoginController::class, 'viewLogin'])->name('viewLogin');
 Route::get('/proses_login',[LoginController::class, 'prosesLogin'])->name('prosesLogin');
 Route::get('/proses_logout',[LoginController::class, 'prosesLogout'])->name('prosesLogout');
 Route::get('/requestwhatsapp',[LoginController::class, 'RequestPINByWhatsApp'])->name('RequestPINByWhatsApp');
-Route::get('/checkUser',[LoginController::class, 'checkUser'])->name('checkUser');
+Route::get('/checkUser',[LoginController::class, 'CheckUser'])->name('CheckUser');
 
 
 Route::middleware('login')->group(function(){

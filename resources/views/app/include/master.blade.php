@@ -7,8 +7,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/admin/img/tcp.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/admin/img/tcp.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/logo/logodrb.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/logo/logodrb.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
   @yield('title')
@@ -28,6 +28,18 @@
   <link href="{{ asset('assets/admin/css/choiceIcon.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/admin/plugins/select2/select2.min.css') }}" rel="stylesheet" />
   @yield('additionalCSS')
+    <style>
+        .container-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-logo {
+            max-width: 80%;
+            height: auto;
+        }
+    </style>
 </head>
 <body class="">
     <div id="overlay-table">
@@ -57,11 +69,14 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-{{--      <div class="logo">--}}
+      <div class="logo">
+          <div class="container-img">
+              <img class="img-logo" src="{{ asset('assets/logo/logodrb.png') }}">
+          </div>
 {{--        <a href="/" class="simple-text logo-normal text-center" style="font-size: 14px;">--}}
 {{--          Sase Meat Shop--}}
 {{--        </a>--}}
-{{--      </div>--}}
+      </div>
       <div class="sidebar-wrapper">
 {{--        <div class="user">--}}
 {{--          <div class="user-info">--}}

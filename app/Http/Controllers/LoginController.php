@@ -18,6 +18,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -90,31 +91,47 @@ class LoginController extends Controller
 
     public function RequestPINByWhatsApp(Request $request)
     {
-        return "success";
-//        $ktp = @$_GET['ktp'];
-//
-//        $Users = DB::table('ibank_nasabah as in')
-//            ->where('in.ktp', $ktp)
-//            ->first();
-//
+//        return "success";
+        $ktp = @$_GET['ktp'];
+
+        $Users = DB::table('ibank_nasabah as in')
+            ->where('in.ktp', $ktp)
+            ->first();
+
 //        $hp = "081249971861";
-//        $hp = $Users->hp;
+        $hp = $Users->hp;
+
+        $sender = DB::table('company')->first();
+
+        $trimSender = str_replace(" ","",$sender->wa_sender);
+
+        $url = "http://36.95.139.41/chat-api/public/datasolusi/sendwa/".$trimSender."/".$hp."/".$Users->pin;
+
+//        echo $url;
 //        $url = "http://36.95.139.41/chat-api/public/datasolusi/sendwa/6281343890809/".$hp."/".$Users->pin;
-//
-//        $response = Http::get($url);
-//
-//        try {
-//            $response = Http::timeout(10)->get($url);
-//
-//            if ($response->failed()) {
-//                throw new Exception("HTTP Request failed with status: " . $response->status());
+
+        try {
+            $response = Http::timeout(10)->get($url);
+
+            if ($response->failed()) {
+                throw new Exception("HTTP Request failed with status: " . $response->status());
+            }
+
+            Log::info('HTTP Response:', [
+                'status_code' => $response->status(),
+                'body' => $response->body()
+            ]);
+
+//            if($response->json()->status == false){
+//                $data = array("message"=>"failed", "status_code"=>403, "data"=>$response->json());
+//                return response()->json($data);
 //            }
-//
-//            $data = array("message"=>"success", "status_code"=>200, "data"=>$response->json());
-//            return response()->json($data);
-//        } catch (Exception $e) {
-//            return response()->json(['error send WA : ' => $e->getMessage()], 500);
-//        }
+
+            $data = array("message"=>"success", "status_code"=>200, "data"=>$response->json());
+            return response()->json($data);
+        } catch (Exception $e) {
+            return response()->json(['error send WA : ' => $e->getMessage()], 500);
+        }
     }
 
     public function prosesLogout()

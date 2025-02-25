@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/admin/img/tcp.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('assets/admin/img/tcp.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/logo/logodrb.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/logo/logodrb.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title> Halaman Login </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -26,10 +26,21 @@
         }
 
         .card-profile .card-avatar {
-            border: 2px solid #a51d1e;
-            max-width: 100px !important;
+            border: 1px solid #a51d1e;
+            max-width: 260px !important;
             max-height: 100px !important;
             margin-top: -60px !important;
+        }
+
+        .container-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-logo {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -50,21 +61,24 @@
 </nav>
 <!-- End Navbar -->
 <div class="wrapper wrapper-full-page">
-    <div class="page-header lock-page header-filter" style="background-image: url('../../assets/admin/img/lock.jpg')">
+    <div class="page-header lock-page header-filter" style="background-image: url('../../assets/admin/img/backGroundImgURL.jpg')">
         <!--   you can change the color of the filter page using: data-color="blue | green | orange | red | purple" -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
                     <form id="LoginValidation" action="" method="">
                         <div class="card card-profile text-center card-hidden full-width">
-{{--                            <div class="card-header ">--}}
-{{--                                <div class="card-avatar background-white padding-20">--}}
-{{--                                    <a href="#pablo">--}}
-{{--                                        <img class="img" src="{{ asset('assets/admin/img/tcp.png') }}">--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            <div class="card-header">
+                                <div class="card-avatar background-white card-header-lgrey padding-20">
+                                    <div class="container-img">
+                                        <img class="img-logo" src="{{ asset('assets/logo/logodrb.png') }}">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body ">
+{{--                                <div class="container-img">--}}
+{{--                                    <img class="img-logo" src="{{ asset('assets/logo/logodrb.png') }}">--}}
+{{--                                </div>--}}
                                 <h4>
                                     <p class="card-title text-center bold">Login Page</p>
                                 </h4>
@@ -121,7 +135,7 @@
             <div class="container">
                 <div class="copyright float-right"> &copy; <script>
                         document.write(new Date().getFullYear())
-                    </script>, Designed by <a href="https://www.instagram.com/sase_aditya/">Sase Aditya.</a>
+                    </script>, Designed by <a href="https://www.instagram.com/sase_aditya/">PT. Datasolusi Cipta Piranti</a>
                 </div>
             </div>
         </footer>
@@ -243,7 +257,7 @@
         }else {
             $.ajax({
                 type: "GET",
-                url: "{{ route('checkUser') }}",
+                url: "{{ route('CheckUser') }}",
                 data: {
                     'ktp': user,
                 },
@@ -276,11 +290,11 @@
                                         'ktp': user,
                                     },
                                     success: function (response) {
-                                        if(response.status_code != 200) {
-                                            swal("Berhasil!", "PIN telah di kirim ke Whatsapp.", "success");
-                                        }else{
-                                            swal("Gagal Kirim PIN!", "Whatsapp sedangn bermasalah, coba lagi nanti!", "success");
-                                        }
+                                        swal("Berhasil!", "PIN telah di kirim ke Whatsapp.", "success");
+                                        // if(response.status_code != 200) {
+                                        // }else{
+                                        //     swal("Gagal Kirim PIN!", "Whatsapp sedang bermasalah, coba lagi nanti!", "error");
+                                        // }
                                     }
                                 });
                             } else {
@@ -294,7 +308,8 @@
     }
 
     function maskPhoneNumber(phoneNumber) {
-        return phoneNumber.slice(0, -4).replace(/\d/g, '*') + phoneNumber.slice(-4);
+        // return phoneNumber.slice(0, -4).replace(/\d/g, '*') + phoneNumber.slice(-4);
+        return phoneNumber.replace(/\d(?=\d{4})/g, "*");
     }
 
     function setFormValidation(id) {
