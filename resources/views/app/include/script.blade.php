@@ -18,15 +18,17 @@
         // "scrollX": true,
         "processing": true,
       "pagingType": "full_numbers",
-      "lengthMenu": [
-        [10, 25, 50, 75, -1],
-        [10, 25, 50, 75, "All"]
-      ],
+      // "lengthMenu": [
+      //   [25, 50, 75, 100, -1],
+      //   [25, 50, 75, 100, "All"]
+      // ],
       // responsive: true,
       language: {
         search: "_INPUT_",
         searchPlaceholder: "Search",
-      }
+      },
+      pageLength: 25,
+      lengthChange: false
     });
 
       $('table.dataTables-SisaStok').DataTable({

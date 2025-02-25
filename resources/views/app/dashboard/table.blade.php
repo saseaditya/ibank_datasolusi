@@ -17,7 +17,7 @@
                             <th class="text-center">Plafond</th>
                             <th class="text-center">Bakidebet</th>
                             <th class="text-center">Tunggakan</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">Lihat</th>
                         </thead>
                         <!-- {{$no = 1}} -->
                         <tbody>
@@ -63,7 +63,7 @@
                         <th class="text-center">No Rekening</th>
                         <th class="text-center">Jenis Tabungan</th>
                         <th class="text-center">Saldo</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">Lihat</th>
                         </thead>
                         <!-- {{$no = 1}} -->
                         <tbody>
@@ -110,7 +110,7 @@
                             <th class="text-center">Tgl Valuta</th>
                             <th class="text-center">Tgl JT</th>
                             <th class="text-center">Nominal</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">Lihat</th>
                         </thead>
                         <!-- {{$no = 1}} -->
                         <tbody>

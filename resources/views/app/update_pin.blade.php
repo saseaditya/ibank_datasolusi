@@ -119,6 +119,7 @@
                             </div>
                             <p id="errorMessage" style="color: red; display: none;"></p>
                             <div class="card-footer justify-content-center no-padding-top">
+                                <a href="{{ route('prosesLogout') }}" class="btn btn-info">Batal / Exit</a>
                                 <button type="submit" class="btn btn-primary-red">Update PIN</button>
                             </div>
                         </div>

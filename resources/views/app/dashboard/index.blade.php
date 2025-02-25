@@ -149,10 +149,10 @@
                     {
                         var d = data[count];
                         no = no + 1;
-                        var dt = $('table#tableTrxTabungan').DataTable().row.add([no,d.tanggal,d.keterangan,d.sandi,d.debet,d.kredit,d.saldo]);
-                        dt.draw().nodes().to$().find('td').filter((index) => [4, 5, 6].includes(index)).addClass( 'text-right' );
+                        var dt = $('table#tableTrxTabungan').DataTable().row.add([d.tanggal,d.keterangan,d.sandi,d.debet,d.kredit,d.saldo]);
+                        dt.draw().nodes().to$().find('td').filter((index) => [3, 4, 5].includes(index)).addClass( 'text-right' );
                         // dt.draw().nodes().to$().find('td').eq(1).addClass('text-center').css('width', '12%' );
-                        // dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
+                        dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
                     }
                     $('#modalTrxTabungan').modal('show');
                     // $('#overlay').hide();
@@ -177,9 +177,9 @@
                     {
                         var d = data[count];
                         no = no + 1;
-                        var dt = $('table#tableTrxPinjaman').DataTable().row.add([no,d.tanggal,d.jadwal,d.keterangan,d.realisasi,d.ang_pokok,d.sld_pokok,d.bunga,d.denda]);
-                        dt.draw().nodes().to$().find('td').filter((index) => [4, 5, 6, 7, 8].includes(index)).addClass( 'text-right' );
-                        dt.draw().nodes().to$().find('td').filter((index) => [2, 3].includes(index)).css('width', '10%' );
+                        var dt = $('table#tableTrxPinjaman').DataTable().row.add([d.tanggal,d.jadwal,d.keterangan,d.realisasi,d.ang_pokok,d.sld_pokok,d.bunga,d.denda]);
+                        dt.draw().nodes().to$().find('td').filter((index) => [3, 4, 5, 6, 7].includes(index)).addClass( 'text-right' );
+                        dt.draw().nodes().to$().find('td').filter((index) => [1, 2].includes(index)).css('width', '10%' );
                         dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
                     }
                 }
@@ -202,9 +202,9 @@
                     {
                         var d = data[count];
                         no = no + 1;
-                        var dt = $('table#tableTrxDeposito').DataTable().row.add([no,d.tanggal,d.jadwal,d.keterangan,d.pokok,d.bunga]);
-                        dt.draw().nodes().to$().find('td').filter((index) => [4,5].includes(index)).addClass( 'text-right' ).css('width', '15%' );
-                        dt.draw().nodes().to$().find('td').filter((index) => [2,3].includes(index)).addClass( 'text-center' ).css('width', '12%' );
+                        var dt = $('table#tableTrxDeposito').DataTable().row.add([d.tanggal,d.jadwal,d.keterangan,d.pokok,d.bunga]);
+                        dt.draw().nodes().to$().find('td').filter((index) => [3,4].includes(index)).addClass( 'text-right' ).css('width', '15%' );
+                        dt.draw().nodes().to$().find('td').filter((index) => [1,2].includes(index)).addClass( 'text-center' ).css('width', '12%' );
                         dt.draw().nodes().to$().find('td').eq(0).addClass('text-center').css('width', '5%' );
                     }
                 }

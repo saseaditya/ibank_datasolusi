@@ -39,11 +39,7 @@ class LoginController extends Controller
     public function viewUpdatePin()
     {
         if(session("cif")){
-            if(session("ktp") && session('pin_ganti') == 0){
-                return view("app.update_pin");
-            } else if (session("ktp") && session('pin_ganti') != 0) {
-                return redirect('/dashboard');
-            }
+            return view("app.update_pin");
         }else{
             return view("app.login");
         }
@@ -66,7 +62,12 @@ class LoginController extends Controller
                 session()->put('ktp',$users->ktp);
                 session()->put('fullname',$users->nama);
                 session()->put('pin_ganti',$users->pin_ganti);
-                $data = array("cif"=>$users->cif, "ktp" => $users->ktp, "fullname"=>$users->nama, "pin_ganti"=>$users->pin_ganti);
+                $kelamin = "Pria";
+                if($users->kelamin == 2){
+                    $kelamin = "Wanita";
+                }
+                session()->put('kelamin',$kelamin);
+                $data = array("cif"=>$users->cif, "ktp" => $users->ktp, "fullname"=>$users->nama, "pin_ganti"=>$users->pin_ganti, "kelamin"=>$kelamin);
                 return response()->json($data);
             }
         } else {

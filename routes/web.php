@@ -34,6 +34,15 @@ Route::middleware('login')->group(function(){
     Route::get('/update_pin',[LoginController::class, 'viewUpdatePin'])->name('viewUpdatePin');
     Route::get('/dashboard',[IbankController::class, 'viewMasterNasabah'])->name('viewDashboard');
     Route::post('/nasabah',[IbankController::class, 'UpdatePinNasabah'])->name('UpdatePinNasabah');
+
+    // Menu Pengajuan Kredit
+    Route::get('/kredit',[IbankController::class, 'viewMasterPengajuanKredit'])->name('viewMasterPengajuanKredit');
+    Route::post('/kredit',[IbankController::class, 'CreatePengajuanKredit'])->name('CreatePengajuanKredit');
+
+    // Menu Saran & Keluhan
+    Route::get('/feedback',[IbankController::class, 'viewMasterFeedback'])->name('viewMasterFeedback');
+    Route::post('/feedback',[IbankController::class, 'CreateFeedback'])->name('CreateFeedback');
+
 });
 
 // Ajax

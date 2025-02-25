@@ -185,6 +185,117 @@
     }
 </script>
 <script>
+    // function requestLocation() {
+    //     if (!("geolocation" in navigator)) {
+    //         alert("Browser Anda tidak mendukung Geolocation.");
+    //         return;
+    //     }
+    //
+    //     navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //             console.log("Latitude:", position.coords.latitude);
+    //             console.log("Longitude:", position.coords.longitude);
+    //             alert("Lokasi berhasil diaktifkan!");
+    //         },
+    //         (error) => {
+    //             if (error.code === error.PERMISSION_DENIED) {
+    //                 alert("Akses lokasi ditolak! Harap aktifkan lokasi untuk melanjutkan.");
+    //
+    //                 // Coba minta izin ulang setelah 3 detik
+    //                 setTimeout(requestLocation, 3000);
+    //             } else {
+    //                 alert("Gagal mendapatkan lokasi: " + error.message);
+    //
+    //                 // Coba lagi setelah 3 detik jika bukan karena ditolak
+    //                 setTimeout(requestLocation, 3000);
+    //             }
+    //         }
+    //     );
+    // }
+    //
+    // // Jalankan saat halaman dimuat atau tombol diklik
+    // requestLocation();
+
+    // async function requestLocationPermission() {
+    //     if (!("geolocation" in navigator)) {
+    //         alert("Browser Anda tidak mendukung Geolocation.");
+    //         return;
+    //     }
+    //
+    //     try {
+    //         let permission = await navigator.permissions.query({ name: "geolocation" });
+    //
+    //         if (permission.state === "granted") {
+    //             // Jika izin sudah diberikan sebelumnya, langsung ambil lokasi
+    //             getLocation();
+    //         } else if (permission.state === "prompt") {
+    //             // Jika izin masih belum ditentukan, minta izin lokasi
+    //             navigator.geolocation.getCurrentPosition(
+    //                 (position) => {
+    //                     console.log("Latitude:", position.coords.latitude);
+    //                     console.log("Longitude:", position.coords.longitude);
+    //                     alert("Lokasi berhasil diaktifkan!");
+    //                 },
+    //                 (error) => {
+    //                     alert("Gagal mendapatkan lokasi: " + error.message);
+    //                 }
+    //             );
+    //         } else if (permission.state === "denied") {
+    //             // Jika izin ditolak, berikan instruksi untuk mengaktifkannya
+    //             alert("Anda telah menolak akses lokasi. Silakan aktifkan secara manual di pengaturan browser.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error saat meminta izin lokasi:", error);
+    //     }
+    // }
+    //
+    // // Fungsi untuk mengambil lokasi
+    // function getLocation() {
+    //     navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //             console.log("Latitude:", position.coords.latitude);
+    //             console.log("Longitude:", position.coords.longitude);
+    //         },
+    //         (error) => {
+    //             alert("Gagal mendapatkan lokasi: " + error.message);
+    //         }
+    //     );
+    // }
+    //
+    // // Panggil fungsi saat tombol diklik atau halaman dimuat
+    // requestLocationPermission();
+
+    // function requestLocation() {
+    //     if ("geolocation" in navigator) {
+    //         navigator.geolocation.getCurrentPosition(
+    //             function (position) {
+    //                 let latitude = position.coords.latitude;
+    //                 let longitude = position.coords.longitude;
+    //                 console.log("Lokasi ditemukan: ", latitude, longitude);
+    //                 alert("Lokasi berhasil diaktifkan!"); // Opsional: Beri tahu pengguna
+    //             },
+    //             function (error) {
+    //                 if (error.code === error.PERMISSION_DENIED) {
+    //                     alert("Lokasi dibutuhkan! Silakan aktifkan lokasi di pengaturan perangkat atau browser.");
+    //
+    //                     // Coba lagi setelah 3 detik
+    //                     // setTimeout(requestLocation, 3000);
+    //                 } else {
+    //                     alert("Gagal mendapatkan lokasi: " + error.message);
+    //
+    //                     // Coba lagi setelah 3 detik
+    //                     // setTimeout(requestLocation, 3000);
+    //                 }
+    //             }
+    //         );
+    //     } else {
+    //         alert("Geolocation tidak didukung di browser ini.");
+    //     }
+    // }
+    //
+    // // Jalankan pertama kali saat halaman dimuat
+    // requestLocation();
+
     $(document).ready(function() {
         md.checkFullPageBackgroundImage();
         setTimeout(function() {

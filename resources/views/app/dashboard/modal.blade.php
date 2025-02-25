@@ -15,7 +15,7 @@
                         <table id="tableTrxPinjaman" class="table table-striped table-no-bordered table-hover dataTables" cellspacing="0" width="100%" style="width:100%">
                             <thead class="bold">
                             <tr>
-                                <th class="disabled-sorting">No</th>
+{{--                                <th class="disabled-sorting">No</th>--}}
 {{--                                <th class="">NoRekening</th>--}}
                                 <th class="">Tanggal</th>
                                 <th class="">Jadwal</th>
@@ -59,7 +59,7 @@
                         <table id="tableTrxTabungan" class="table table-striped table-no-bordered table-hover dataTables" cellspacing="0" width="100%" style="width:100%">
                             <thead class="bold">
                             <tr>
-                                <th class="disabled-sorting text-center">No</th>
+{{--                                <th class="disabled-sorting text-center">No</th>--}}
 {{--                                <th class="text-center">No.Rekening</th>--}}
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Keterangan</th>
@@ -101,7 +101,7 @@
                         <table id="tableTrxDeposito" class="table table-striped table-no-bordered table-hover dataTables" cellspacing="0" width="100%" style="width:100%">
                             <thead class="bold">
                             <tr>
-                                <th class="text-center">No</th>
+{{--                                <th class="text-center">No</th>--}}
 {{--                                <th class="text-center">No.Rekening</th>--}}
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Jadwal</th>

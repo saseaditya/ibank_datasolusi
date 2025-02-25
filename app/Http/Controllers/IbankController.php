@@ -59,6 +59,93 @@ class IbankController extends Controller
         ));
     }
 
+    public function viewMasterPengajuanKredit(Request $request, $id = null)
+    {
+        $viewPage = "app.kredit.index";
+        $page	= ["Home","Daftar Pengajuan Kredit"];
+
+
+        $data = DB::table('app_pengajuan')->where('cif',session("cif"))->orderBy("waktu","desc")->get();
+        $produk = DB::table('produk')->get();
+
+        return view($viewPage,array(
+            'pageNow' 	 	=> $page,
+            'data' 	 	    => $data,
+            'produk' 	 	=> $produk,
+            'menuActive' 	=> "kredit"
+        ));
+    }
+
+    public function CreatePengajuanKredit(Request $request, $id = null)
+    {
+
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
+        $txtIdProduk = $request->input('txtIdProduk');
+        $txtNamaProduk = $request->input('txtNamaProduk');
+        $txtJenis = $request->input('txtJenis');
+        $txtKet = $request->input('txtKet');
+        $txtJJ = $request->input('txtJJ');
+        $txtPlafond = $request->input('txtPlafond');
+
+        $mapPengajuan = $latitude.+",".$longitude;
+
+        $data = [
+            'cif' => session('cif'),
+            'produk' => $txtIdProduk,
+            'nama_produk' => $txtNamaProduk,
+            'jenis' => $txtJenis,
+            'keterangan' => $txtKet,
+            'jenis_jaminan' => $txtJJ,
+            'plafond' => $txtPlafond,
+            'map_pengajuan' => $mapPengajuan,
+//            'waktu' => date("Y-m-d h:i:s"),
+        ];
+
+        $prosesUpdate = DB::table('app_pengajuan')->insert($data);
+
+        if($prosesUpdate){
+            return redirect()->back()->with('message', 'Pengajuan Berhasil')->with('message_status', 'success');
+        } else {
+            return redirect()->back()->with('message', 'Pengajuan Gagal')->with('message_status', 'failed');
+        }
+
+    }
+
+    public function viewMasterFeedback(Request $request, $id = null)
+    {
+        $viewPage = "app.feedback.index";
+        $page	= ["Home","Saran & Keluhan"];
+
+
+        $data = DB::table('ibank_keluhan')->where('cif',session("cif"))->orderBy("waktu","desc")->get();
+
+        return view($viewPage,array(
+            'pageNow' 	 	=> $page,
+            'data' 	 	    => $data,
+            'menuActive' 	=> "feedback"
+        ));
+    }
+
+    public function CreateFeedback(Request $request, $id = null)
+    {
+
+        $data = [
+            'cif' => session('cif'),
+            'isi' => $request->input('txtDeskripsi')
+        ];
+
+        $prosesUpdate = DB::table('ibank_pengajuan')->insert($data);
+
+        if($prosesUpdate){
+            return redirect()->back()->with('message', 'Berhasil kirim Saran / Keluhan')->with('message_status', 'success');
+        } else {
+            return redirect()->back()->with('message', 'Gagal')->with('message_status', 'failed');
+        }
+
+    }
+
     public function UpdatePinNasabah(Request $request, $id = null)
     {
         $countPinUpdate = DB::table('ibank_nasabah')->select('pin_ganti')->where('cif',session("cif"))->first();
