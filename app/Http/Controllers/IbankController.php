@@ -25,6 +25,17 @@ use DateTime;
 
 class IbankController extends Controller
 {
+    public function viewHome(Request $request, $id = null)
+    {
+        $viewPage = "app.home";
+        $page	= ["Menu Utama"];
+
+
+        return view($viewPage,array(
+            'pageNow' 	 	=> $page,
+            'menuActive' 	=> "home"
+        ));
+    }
     //
     public function viewMasterNasabah(Request $request, $id = null)
     {
@@ -82,14 +93,17 @@ class IbankController extends Controller
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
 
-        $txtIdProduk = $request->input('txtIdProduk');
-        $txtNamaProduk = $request->input('txtNamaProduk');
-        $txtJenis = $request->input('txtJenis');
-        $txtKet = $request->input('txtKet');
+        $produk = explode(',', $request->input('txtProduct'));
+
+        $txtIdProduk = $produk[0];
+        $txtNamaProduk = $produk[1];
+
+        $txtJenis = $request->input('txtJK');
+        $txtKet = $request->input('txtTP');
         $txtJJ = $request->input('txtJJ');
         $txtPlafond = $request->input('txtPlafond');
 
-        $mapPengajuan = $latitude.+",".$longitude;
+        $mapPengajuan = $latitude.",".$longitude;
 
         $data = [
             'cif' => session('cif'),
@@ -120,10 +134,12 @@ class IbankController extends Controller
 
 
         $data = DB::table('ibank_keluhan')->where('cif',session("cif"))->orderBy("waktu","desc")->get();
+        $produk = DB::table('produk')->get();
 
         return view($viewPage,array(
             'pageNow' 	 	=> $page,
             'data' 	 	    => $data,
+            'produk' 	 	=> $produk,
             'menuActive' 	=> "feedback"
         ));
     }
@@ -136,14 +152,28 @@ class IbankController extends Controller
             'isi' => $request->input('txtDeskripsi')
         ];
 
-        $prosesUpdate = DB::table('ibank_pengajuan')->insert($data);
+        $prosesUpdate = DB::table('ibank_keluhan')->insert($data);
 
         if($prosesUpdate){
             return redirect()->back()->with('message', 'Berhasil kirim Saran / Keluhan')->with('message_status', 'success');
         } else {
             return redirect()->back()->with('message', 'Gagal')->with('message_status', 'failed');
         }
+    }
 
+    public function viewMasterVA(Request $request, $id = null)
+    {
+        $viewPage = "app.va.index";
+        $page	= ["Home","List Virtual Account"];
+
+
+        $data = DB::table('ibank_va')->where('cif',session("cif"))->first();
+
+        return view($viewPage,array(
+            'pageNow' 	 	=> $page,
+            'data' 	 	    => $data,
+            'menuActive' 	=> "va"
+        ));
     }
 
     public function UpdatePinNasabah(Request $request, $id = null)

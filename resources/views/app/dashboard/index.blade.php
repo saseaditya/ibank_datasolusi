@@ -12,7 +12,11 @@
             <div class="card">
                 <div class="card-header card-header-icon card-header-danger">
                     <div class="card-icon">
-                        <i class="material-icons">perm_identity</i>
+                        @if(session('kelamin') == "Pria")
+                            <i class="fa-solid fa-person fa-2xl"></i>
+                        @else
+                            <i class="fa-solid fa-person-dress fa-2xl"></i>
+                        @endif
                     </div>
                     <h4 class="card-title">Profile</h4>
                 </div>

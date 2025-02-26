@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header card-header-icon card-header-info">
                 <div class="card-icon">
-                    <i class="material-icons">assignment</i>
+                    <i class="fas fa-hand-holding-usd fa-lg"></i>
                 </div>
                 <h4 class="card-title "> Rekening Pinjaman</h4>
             </div>
@@ -50,7 +50,7 @@
         <div class="card">
             <div class="card-header card-header-icon card-header-info">
                 <div class="card-icon">
-                    <i class="material-icons">assignment</i>
+                    <i class="fas fa-piggy-bank fa-lg"></i>
                 </div>
                 <h4 class="card-title "> Rekening Tabungan</h4>
             </div>
@@ -95,7 +95,7 @@
         <div class="card">
             <div class="card-header card-header-icon card-header-info">
                 <div class="card-icon">
-                    <i class="material-icons">assignment</i>
+                    <i class="fas fa-donate fa-lg"></i>
                 </div>
                 <h4 class="card-title "> Rekening Deposito</h4>
             </div>

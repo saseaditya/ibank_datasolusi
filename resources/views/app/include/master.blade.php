@@ -39,12 +39,47 @@
             max-width: 80%;
             height: auto;
         }
+
+        /* Loader Fullscreen */
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        /* Animasi Loader */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #3498db;
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body class="">
     <div id="overlay-table">
         <div class="loader"></div>
     </div>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
   <div class="wrapper ">
     <div class="modal fade modal-mini modal-primary" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-small">
@@ -165,6 +200,7 @@
     @yield('calender')
   </div>
   <!--   Core JS Files   -->
+  <script src="https://kit.fontawesome.com/8bdf77d5de.js" crossorigin="anonymous"></script>
   <script src="{{ asset('assets/admin/js/core/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/admin/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('assets/admin/js/core/bootstrap-material-design.min.js') }}"></script>
@@ -225,6 +261,13 @@
     var lasCount = 0;
     var lasData;
     var first = true;
+
+    window.addEventListener("load", function() {
+        setTimeout(() => {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }, 500); // Tambahkan delay kecil jika perlu
+    });
 
     $(document).ready(function() {
       @if(!empty(session('message')))

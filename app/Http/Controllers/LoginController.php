@@ -29,7 +29,7 @@ class LoginController extends Controller
             if(session("ktp") && session('pin_ganti') == 0){
                 return view("app.update_pin");
             } else if (session("ktp") && session('pin_ganti') != 0) {
-                return redirect('/dashboard');
+                return redirect('/home');
             }
         }else{
             return view("app.login");
@@ -60,14 +60,15 @@ class LoginController extends Controller
             {
                 session()->put('cif',$users->cif);
                 session()->put('ktp',$users->ktp);
-                session()->put('fullname',$users->nama);
+                session()->put('fullname',ucwords(strtolower(trim($users->nama))));
                 session()->put('pin_ganti',$users->pin_ganti);
+                session()->put('pin',$users->pin);
                 $kelamin = "Pria";
                 if($users->kelamin == 2){
                     $kelamin = "Wanita";
                 }
                 session()->put('kelamin',$kelamin);
-                $data = array("cif"=>$users->cif, "ktp" => $users->ktp, "fullname"=>$users->nama, "pin_ganti"=>$users->pin_ganti, "kelamin"=>$kelamin);
+                $data = array("cif"=>$users->cif, "ktp" => $users->ktp, "fullname"=>ucwords(strtolower(trim($users->nama))), "pin_ganti"=>$users->pin_ganti, "kelamin"=>$kelamin);
                 return response()->json($data);
             }
         } else {
@@ -90,6 +91,22 @@ class LoginController extends Controller
         return response()->json($Users);
     }
 
+    public function CheckPIN(Request $request)
+    {
+        $pin = @$_POST['pin'];
+
+        $Users = DB::table('ibank_nasabah as in')
+            ->where('in.cif', session('cif'))
+            ->where('in.pin', $pin)
+            ->first();
+
+        if($Users == null) {
+            return "false";
+        }
+
+        return "true";
+    }
+
     public function RequestPINByWhatsApp(Request $request)
     {
 //        return "success";
@@ -106,7 +123,11 @@ class LoginController extends Controller
 
         $trimSender = str_replace(" ","",$sender->wa_sender);
 
-        $url = "http://36.95.139.41/chat-api/public/datasolusi/sendwa/".$trimSender."/".$hp."/".$Users->pin;
+        $trimName = trim($Users->nama);
+
+        $text = ucwords(strtolower($trimName)).' | PIN internet banking Anda : '.$Users->pin;
+
+        $url = "http://36.95.139.41/chat-api/public/datasolusi/sendwa/".$trimSender."/".$hp."/".$text;
 
 //        echo $url;
 //        $url = "http://36.95.139.41/chat-api/public/datasolusi/sendwa/6281343890809/".$hp."/".$Users->pin;

@@ -3,7 +3,7 @@
 @section('title','Feedback')
 
 @section('content')
-    @include('app.dashboard.modal')
+    @include('app.feedback.modal')
 
 <div class="content">
   <div class="container-fluid">
@@ -19,7 +19,7 @@
                             <h4 class="card-title">Saran & Keluhan</h4>
                         </div>
                         <div class="col-md-2 col-sm-2 col-2">
-                            <button type="button" class="btn btn-info padding-5 margin-top-15" data-toggle="modal" data-target="#modalClient" id="btnAddNew" style="float: right;">
+                            <button type="button" class="btn btn-info padding-5 margin-top-15" data-toggle="modal" data-target="#modalKeluhan" id="btnAddNew" style="float: right;">
                               <i class="material-icons">add</i>
 {{--                              Tambah--}}
                             </button>
@@ -88,6 +88,9 @@
 @section('additionalJS')
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#btnAddNew').click(function () {
+            $('#formKeluhan').attr('action','{{route('CreateFeedback')}}');
+        });
 
 
     })

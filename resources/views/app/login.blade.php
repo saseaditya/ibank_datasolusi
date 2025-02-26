@@ -142,6 +142,7 @@
     </div>
 </div>
 <!--   Core JS Files   -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('assets/admin/js/core/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/core/popper.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/core/bootstrap-material-design.min.js') }}"></script>
@@ -337,7 +338,7 @@
                         type: "success"
                     }).catch(swal.noop).then((value) => {
                         if (response.pin_ganti != 0) {
-                            window.location = ('./dashboard');
+                            window.location = ('./home');
                         }else{
                             window.location = ('./update_pin');
                         }
@@ -394,6 +395,15 @@
                             reverseButtons: true
                         }).then((willConfirm) => {
                             if (willConfirm.value) {
+                                Swal.fire({
+                                    title: 'Loading...',
+                                    text: 'Mohon tunggu sebentar',
+                                    allowOutsideClick: false,
+                                    didOpen: () => {
+                                        Swal.showLoading(); // Menampilkan loader
+                                    }
+                                });
+
                                 $.ajax({
                                     type: "GET",
                                     url: "{{ route('RequestPINByWhatsApp') }}",
@@ -401,7 +411,12 @@
                                         'ktp': user,
                                     },
                                     success: function (response) {
-                                        swal("Berhasil!", "PIN telah di kirim ke Whatsapp.", "success");
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Berhasil!',
+                                            text: 'PIN telah di kirim ke Whatsapp'
+                                        });
+                                        // swal("Berhasil!", "PIN telah di kirim ke Whatsapp.", "success");
                                         // if(response.status_code != 200) {
                                         // }else{
                                         //     swal("Gagal Kirim PIN!", "Whatsapp sedang bermasalah, coba lagi nanti!", "error");

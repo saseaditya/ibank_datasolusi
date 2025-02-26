@@ -10,12 +10,11 @@
         @foreach($data as $tmp)
             <tr class="table">
                 <td class="text-center">{{date("Y-m-d",strtotime($tmp->waktu))}}</td>
-                <td class="text-right">{{$tmp->nama_produk}}</td>
+                <td class="text-right">{{$tmp->isi}}</td>
                 <td class="td-actions text-center">
                     @if($tmp->flag == 0)
                     <a href="javascript:void(0)">
                         <button type="button" class="btn btn-warning">
-{{--                                            <i class="material-icons">remove_red_eye</i>--}}
                             Belum direspon
                         </button>
                     </a>
