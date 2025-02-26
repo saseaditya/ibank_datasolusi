@@ -117,11 +117,11 @@ class LoginController extends Controller
             ->first();
 
 //        $hp = "081249971861";
-        $hp = $Users->hp;
+        $hp = trim($Users->hp);
 
         $sender = DB::table('company')->first();
 
-        $trimSender = str_replace(" ","",$sender->wa_sender);
+        $trimSender = trim($sender->wa_sender);
 
         $trimName = trim($Users->nama);
 
