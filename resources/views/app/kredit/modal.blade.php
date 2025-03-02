@@ -12,11 +12,22 @@
                 </div>
                 <div class="modal-body">
                     <hr>
+
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label class="form-label-simple">Email address</label>--}}
+{{--                                <input type="email" class="form-control-simple" id="email" placeholder="Enter email">--}}
+{{--                                <div class="form-text">We'll never share your email with anyone else.</div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
                     <div class="row">
-                        <label class="col-md-3 col-sm-6 col-6 semi-bold col-form-label">Produk Pinjaman :</label>
-                        <div class="col-md-5 col-sm-6 col-6">
-                            <div class="form-group" style="margin-top: 4px;">
-                                <select class="selectpicker" id="txtProduct" name="txtProduct" data-size="7" data-style="select-with-transition" required="true" >
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label-simple">Produk Pinjaman :</label>
+                                <select class="form-control-simple" id="txtProduct" name="txtProduct" data-size="7" data-style="select-with-transition" required="true" >
                                     <option selected="" disabled="" value="0">Product</option>
                                     @foreach($produk as $tmp)
                                     <option value="{{$tmp->id}},{{$tmp->nama}}">{{$tmp->nama}}</option>
@@ -27,9 +38,9 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-md-3 col-sm-6 col-6  col-form-label">Jenis Kredit : </label>
-                        <div class="col-md-9 col-sm-6 col-6">
-                            <div class="form-check margin-top-20">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <label class="form-label-simple">Jenis Kredit : </label>
+                            <div class="form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="radio" name="txtJK" value="1" required="true"> Flat
                                     <span class="circle">
@@ -47,18 +58,18 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-md-3 col-sm-6 col-6 col-form-label">Tujuan Penggunaan : </label>
-                        <div class="col-md-9 col-sm-6 col-6">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <label class="form-label-simple">Tujuan Penggunaan : </label>
                             <div class="form-group">
-                                <input type="text" id="txtTP" name="txtTP" class="form-control" required="true">
+                                <textarea type="text" id="txtTP" name="txtTP" class="form-control-simple" required="true"></textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <label class="col-md-3 col-sm-6 col-6 col-form-label">Jenis Jaminan : </label>
-                        <div class="col-md-9 col-sm-6 col-6">
-                            <div class="form-check margin-top-20">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <label class="form-label-simple">Jenis Jaminan : </label>
+                            <div class="form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="radio" name="txtJJ" value="1" required="true"> 1. BPKB
                                     <span class="circle">
@@ -82,10 +93,17 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-md-3 col-sm-6 col-6 col-form-label">Pengajuan Kredit Rp. : </label>
-                        <div class="col-md-9 col-sm-6 col-6">
-                            <div class="form-group">
-                                <input type="number" id="txtPlafond" name="txtPlafond" class="form-control" required="true">
+{{--                        <label class="col-md-3 col-sm-6 col-6 col-form-label">Pengajuan Kredit : </label>--}}
+{{--                        <div class="col-md-9 col-sm-6 col-6">--}}
+{{--                            <div class="input">--}}
+{{--                                <input type="number" id="txtPlafond" name="txtPlafond" class="form-control" required="true">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                        <div class="col-md-12">
+                            <label for="username" class="form-label-simple">Pengajuan Kredit :</label>
+                            <div class="input-group-simple">
+                                <span class="input-group-text-simple">Rp. </span>
+                                <input type="text" class="" id="txtPlafond" name="txtPlafond" placeholder="Masukan Jumlah..." required="true">
                             </div>
                         </div>
                     </div>
@@ -94,12 +112,19 @@
                     <input type="hidden" name="longitude" id="longitude" value="0"/>
 
                     <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success" style="width: 100%">
+                                <i class="fa-solid fa-pen"></i>     BUAT PENGAJUAN
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger btn-link" type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button>
-                    <button type="submit" class="btn btn-success btn-link" >Submit</button>
-                </div>
+{{--                <div class="modal-footer">--}}
+{{--                    <button class="btn btn-danger btn-link" type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button>--}}
+
+{{--                </div>--}}
             </div>
         </form>
     </div>

@@ -197,11 +197,12 @@
         $("#LoginValidation").submit(function(event) {
             event.preventDefault();
             var isValid = true;
-            var user = $('#username').val();
-            var pass = $('#password').val();
+            var user = $('#txtOldPin').val();
+            var pass = $('#txtNewPin').val();
             if (user == "" || pass == "") {
                 isValid = false;
             }
+            console.log(isValid)
             if (isValid) {
                 tryLogin();
             } else {}

@@ -13,9 +13,11 @@
                 <div class="card-header card-header-icon card-header-danger">
                     <div class="card-icon">
                         @if(session('kelamin') == "Pria")
-                            <i class="fa-solid fa-person fa-2xl"></i>
+                            <img src="{{asset("assets/icon/rekening/wanita-removebg-preview.png")}}" >
+{{--                            <i class="fa-solid fa-person fa-2xl"></i>--}}
                         @else
-                            <i class="fa-solid fa-person-dress fa-2xl"></i>
+                            <img src="{{asset("assets/icon/rekening/laki-removebg-preview.png")}}" >
+{{--                            <i class="fa-solid fa-person-dress fa-2xl"></i>--}}
                         @endif
                     </div>
                     <h4 class="card-title">Profile</h4>
@@ -70,6 +72,11 @@
 @endsection
 @section('additionalCSS')
 <style type="text/css">
+    .card-icon img{
+        width: 50px;
+        height: auto;
+    }
+
     table.dataTables thead th {
         white-space: nowrap;
         overflow: hidden;

@@ -32,14 +32,14 @@ class LoginController extends Controller
                 return redirect('/home');
             }
         }else{
-            return view("app.login");
+            return view("app.loginv2");
         }
     }
 
     public function viewUpdatePin()
     {
         if(session("cif")){
-            return view("app.update_pin");
+            return view("app.update_pinv2");
         }else{
             return view("app.login");
         }

@@ -3,7 +3,8 @@
         <div class="card">
             <div class="card-header card-header-icon card-header-info">
                 <div class="card-icon">
-                    <i class="fas fa-hand-holding-usd fa-lg"></i>
+                    <img src="{{asset("assets/icon/rekening/kredit-removebg-preview.png")}}" >
+{{--                    <i class="fas fa-hand-holding-usd fa-lg"></i>--}}
                 </div>
                 <h4 class="card-title "> Rekening Pinjaman</h4>
             </div>
@@ -12,7 +13,7 @@
                 <div class="material-datatables">
                     <table id="dataList" class="table dataTables table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead class="bold">
-                            <th class="text-center ">ID</th>
+{{--                            <th class="text-center ">ID</th>--}}
                             <th class="text-center">No Rekening</th>
                             <th class="text-center">Plafond</th>
                             <th class="text-center">Bakidebet</th>
@@ -23,7 +24,7 @@
                         <tbody>
                         @foreach($dataPinjaman as $tmp)
                             <tr class="table">
-                                <td class="text-center">{{$no++}}</td>
+{{--                                <td class="text-center">{{$no++}}</td>--}}
                                 <td class="text-center">{{$tmp->norekening}}</td>
                                 <td class="text-right">Rp. {{$tmp->Plafond}}</td>
                                 <td class="text-right">Rp. {{$tmp->Bakidebet}}</td>
@@ -50,7 +51,7 @@
         <div class="card">
             <div class="card-header card-header-icon card-header-info">
                 <div class="card-icon">
-                    <i class="fas fa-piggy-bank fa-lg"></i>
+                    <img src="{{asset("assets/icon/rekening/tabungan-removebg-preview.png")}}" >
                 </div>
                 <h4 class="card-title "> Rekening Tabungan</h4>
             </div>
@@ -59,7 +60,7 @@
                 <div class="material-datatables">
                     <table id="dataList" class="table dataTables table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead class="bold">
-                        <th class="text-center">ID</th>
+{{--                        <th class="text-center">ID</th>--}}
                         <th class="text-center">No Rekening</th>
                         <th class="text-center">Jenis Tabungan</th>
                         <th class="text-center">Saldo</th>
@@ -69,7 +70,7 @@
                         <tbody>
                         @foreach($dataTabungan as $tmp)
                             <tr class="table">
-                                <td class="text-center">{{$no++}}</td>
+{{--                                <td class="text-center">{{$no++}}</td>--}}
                                 <td class="text-center">{{$tmp->norekening}}</td>
                                 <td class="text-center">{{$tmp->jenis_tabungan}}</td>
                                 <td class="text-right">Rp. {{number_format($tmp->saldo,0,",",".")}}</td>
@@ -95,7 +96,7 @@
         <div class="card">
             <div class="card-header card-header-icon card-header-info">
                 <div class="card-icon">
-                    <i class="fas fa-donate fa-lg"></i>
+                    <img src="{{asset("assets/icon/rekening/deposito-removebg-preview.png")}}" >
                 </div>
                 <h4 class="card-title "> Rekening Deposito</h4>
             </div>
@@ -104,7 +105,7 @@
                 <div class="material-datatables">
                     <table id="dataList" class="table dataTables table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                         <thead class="bold">
-                            <th class="text-center">ID</th>
+{{--                            <th class="text-center">ID</th>--}}
                             <th class="text-center">No Rekening</th>
                             <th class="text-center">Tgl Buka</th>
                             <th class="text-center">Tgl Valuta</th>
@@ -116,7 +117,7 @@
                         <tbody>
                         @foreach($dataDeposito as $tmp)
                             <tr >
-                                <td class="text-center">{{$no++}}</td>
+{{--                                <td class="text-center">{{$no++}}</td>--}}
                                 <td class="text-center">{{$tmp->norekening}}</td>
                                 <td class="text-center">{{$tmp->tgl_buka}}</td>
                                 <td class="text-center">{{$tmp->tgl_valuta}}</td>

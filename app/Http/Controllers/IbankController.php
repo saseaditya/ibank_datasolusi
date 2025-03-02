@@ -22,17 +22,24 @@ use App\PDFGenerate;
 use Dompdf\Dompdf;
 use PDF;
 use DateTime;
+use Controllers;
 
 class IbankController extends Controller
 {
     public function viewHome(Request $request, $id = null)
     {
-        $viewPage = "app.home";
-        $page	= ["Menu Utama"];
+        $viewPage = "app.homev2";
+        $page	= [""];
 
+        $dataPinjaman = DB::table('ibank_pinjaman')->where('cif',session("cif"))->get();
+        $dataDeposito = DB::table('ibank_deposito')->where('cif',session("cif"))->get();
+        $dataTabungan = DB::table('ibank_tabungan')->where('cif',session("cif"))->get();
+
+        $totalRek = count($dataDeposito) + count($dataTabungan) + count($dataPinjaman);
 
         return view($viewPage,array(
             'pageNow' 	 	=> $page,
+            'totalRek' 	 	=> $totalRek,
             'menuActive' 	=> "home"
         ));
     }
@@ -77,6 +84,11 @@ class IbankController extends Controller
 
 
         $data = DB::table('app_pengajuan')->where('cif',session("cif"))->orderBy("waktu","desc")->get();
+
+        foreach ($data as $tmp){
+            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+        }
+
         $produk = DB::table('produk')->get();
 
         return view($viewPage,array(
@@ -127,6 +139,10 @@ class IbankController extends Controller
 
     }
 
+    public function truncate($text, $length = 20) {
+        return strlen($text) > $length ? substr($text, 0, $length) . '...' : $text;
+    }
+
     public function viewMasterFeedback(Request $request, $id = null)
     {
         $viewPage = "app.feedback.index";
@@ -135,6 +151,10 @@ class IbankController extends Controller
 
         $data = DB::table('ibank_keluhan')->where('cif',session("cif"))->orderBy("waktu","desc")->get();
         $produk = DB::table('produk')->get();
+
+        foreach ($data as $tmp){
+            $tmp->isi = $this->truncate($tmp->isi, 20);
+        }
 
         return view($viewPage,array(
             'pageNow' 	 	=> $page,
@@ -217,6 +237,16 @@ class IbankController extends Controller
         $norek = @$_GET['norek'];
         $dataPinjaman = DB::table('ibank_pinjaman_trx')->where('norekening',$norek)->get();
 
+        foreach ($dataPinjaman as $tmp){
+            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+            $tmp->realisasi = number_format($tmp->realisasi,0,",",".");
+            $tmp->ang_pokok = number_format($tmp->ang_pokok,0,",",".");
+            $tmp->sld_pokok = number_format($tmp->sld_pokok,0,",",".");
+            $tmp->bunga = number_format($tmp->bunga,0,",",".");
+            $tmp->denda = number_format($tmp->denda,0,",",".");
+//            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+        }
+
         return response()->json($dataPinjaman);
     }
 
@@ -225,6 +255,13 @@ class IbankController extends Controller
         $norek = @$_GET['norek'];
         $dataDeposito = DB::table('ibank_deposito_trx')->where('norekening',$norek)->get();
 
+        foreach ($dataDeposito as $tmp){
+            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+            $tmp->pokok = number_format($tmp->pokok,0,",",".");
+            $tmp->bunga = number_format($tmp->bunga,0,",",".");
+//            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+        }
+
         return response()->json($dataDeposito);
     }
 
@@ -232,6 +269,14 @@ class IbankController extends Controller
     {
         $norek = @$_GET['norek'];
         $dataTabungan = DB::table('ibank_tabungan_trx')->where('norekening',$norek)->get();
+
+        foreach ($dataTabungan as $tmp){
+            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+            $tmp->debet = number_format($tmp->debet,0,",",".");
+            $tmp->kredit = number_format($tmp->kredit,0,",",".");
+            $tmp->saldo = number_format($tmp->saldo,0,",",".");
+//            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+        }
 
         return response()->json($dataTabungan);
     }

@@ -15,6 +15,9 @@
     });
 
     $('table.dataTables').DataTable({
+        paging: false,        // Sembunyikan paging
+        searching: false,     // Sembunyikan search bar
+        info: false ,          // Sembunyikan jumlah data
         // "scrollX": true,
         "processing": true,
       "pagingType": "full_numbers",
@@ -27,7 +30,7 @@
         search: "_INPUT_",
         searchPlaceholder: "Search",
       },
-      pageLength: 25,
+      // pageLength: "full",
       lengthChange: false
     });
 

@@ -7,8 +7,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/logo/logodrb.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/logo/logodrb.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/logo/logobank.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/logo/logobank.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
   @yield('title')
@@ -106,7 +106,7 @@
     -->
       <div class="logo">
           <div class="container-img">
-              <img class="img-logo" src="{{ asset('assets/logo/logodrb.png') }}">
+              <img class="img-logo" src="{{ asset('assets/logo/logobank.png') }}">
           </div>
 {{--        <a href="/" class="simple-text logo-normal text-center" style="font-size: 14px;">--}}
 {{--          Sase Meat Shop--}}

@@ -13,18 +13,26 @@
                 <div class="modal-body">
                     <hr>
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">Saran & Keluhan : </label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
+                            <label class="form-label-simple">Saran & Keluhan : </label>
                             <div class="form-group">
-                                <input type="text" id="txtDeskripsi" name="txtDeskripsi" class="form-control" placeholder="Masukan keluhan anda">
+                                <textarea type="text" id="txtDeskripsi" name="txtDeskripsi" class="form-control-simple" placeholder="Masukan keluhan anda"></textarea>
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success" id="btnSubmit" style="width: 100%">
+                                <i class="fa-solid fa-pen"></i>     BUAT PENGAJUAN
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger btn-link" type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button>
-                    <button type="submit" class="btn btn-success btn-link" >Submit</button>
-                </div>
+{{--                <div class="modal-footer">--}}
+{{--                    <button class="btn btn-danger btn-link" type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button>--}}
+{{--                    <button type="submit" class="btn btn-success btn-link" >Submit</button>--}}
+{{--                </div>--}}
             </div>
         </form>
     </div>
