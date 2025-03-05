@@ -235,7 +235,7 @@ class IbankController extends Controller
     public function GetTrxPinjamanByRekening(Request $request)
     {
         $norek = @$_GET['norek'];
-        $dataPinjaman = DB::table('ibank_pinjaman_trx')->where('norekening',$norek)->get();
+        $dataPinjaman = DB::table('ibank_pinjaman_trx')->where('norekening',$norek)->orderBy("tanggal","desc")->get();
 
         foreach ($dataPinjaman as $tmp){
             $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
@@ -254,7 +254,7 @@ class IbankController extends Controller
     public function GetTrxDepositoByRekening(Request $request)
     {
         $norek = @$_GET['norek'];
-        $dataDeposito = DB::table('ibank_deposito_trx')->where('norekening',$norek)->get();
+        $dataDeposito = DB::table('ibank_deposito_trx')->where('norekening',$norek)->orderBy("tanggal","desc")->get();
 
         foreach ($dataDeposito as $tmp){
             $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
@@ -270,7 +270,7 @@ class IbankController extends Controller
     public function GetTrxTabunganByRekening(Request $request)
     {
         $norek = @$_GET['norek'];
-        $dataTabungan = DB::table('ibank_tabungan_trx')->where('norekening',$norek)->get();
+        $dataTabungan = DB::table('ibank_tabungan_trx')->where('norekening',$norek)->orderBy("tanggal","desc")->get();
 
         foreach ($dataTabungan as $tmp){
             $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
