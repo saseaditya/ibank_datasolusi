@@ -231,6 +231,27 @@
 
     $(document).ready(function() {
 
+        const currencyInput = document.getElementById("txtPlafond");
+
+        currencyInput.addEventListener("input", function (e) {
+            let value = e.target.value.replace(/[^0-9]/g, ""); // Hanya angka
+
+            // Jika kosong, jangan tampilkan "Rp"
+            if (value === "") {
+                e.target.value = "";
+                return;
+            }
+
+            // Format ke currency
+            let formattedValue = new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0,
+            }).format(value);
+
+            e.target.value = formattedValue.replace("Rp", ""); // Tambahkan spasi setelah "Rp"
+        });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

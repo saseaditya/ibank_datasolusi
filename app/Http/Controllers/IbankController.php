@@ -86,7 +86,7 @@ class IbankController extends Controller
         $data = DB::table('app_pengajuan')->where('cif',session("cif"))->orderBy("waktu","desc")->get();
 
         foreach ($data as $tmp){
-            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+            $tmp->waktu = date("d M Y", strtotime($tmp->waktu));
         }
 
         $produk = DB::table('produk')->get();
@@ -239,6 +239,7 @@ class IbankController extends Controller
 
         foreach ($dataPinjaman as $tmp){
             $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+            $tmp->jadwal = date("d M Y", strtotime($tmp->jadwal));
             $tmp->realisasi = number_format($tmp->realisasi,0,",",".");
             $tmp->ang_pokok = number_format($tmp->ang_pokok,0,",",".");
             $tmp->sld_pokok = number_format($tmp->sld_pokok,0,",",".");
@@ -257,6 +258,7 @@ class IbankController extends Controller
 
         foreach ($dataDeposito as $tmp){
             $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));
+            $tmp->jadwal = date("d M Y", strtotime($tmp->jadwal));
             $tmp->pokok = number_format($tmp->pokok,0,",",".");
             $tmp->bunga = number_format($tmp->bunga,0,",",".");
 //            $tmp->tanggal = date("d M Y", strtotime($tmp->tanggal));

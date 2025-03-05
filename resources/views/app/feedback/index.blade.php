@@ -270,7 +270,7 @@
             $("#btnSubmit").attr('disabled', false);
         })
 
-        $('#dataList tbody').on('click', 'tr', function() {
+        $('#dataListFeedback tbody').on('click', 'tr', function() {
             var data = table.row(this).data();
             // alert('Anda mengklik baris dengan data: ' + data[0]); // Data pertama dalam baris
             $("#modalKeluhan").modal('show');

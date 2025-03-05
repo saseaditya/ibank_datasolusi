@@ -34,7 +34,7 @@
 
             <button type="submit" class="w-full p-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 mt-5">Masuk</button>
         </form>
-        <p class="text-center text-xs text-gray-500 mt-4">Belum Punya PIN ? <a href="#" class="text-indigo-600 hover:underline" onclick="RequestPIN()">Minta PIN</a></p>
+        <p class="text-center text-xs text-gray-500 mt-4">Lupa / Belum Punya PIN ? <a href="#" class="text-indigo-600 hover:underline" onclick="RequestPIN()">Minta PIN</a></p>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

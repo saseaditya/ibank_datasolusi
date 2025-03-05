@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-success" id="btnSubmit" style="width: 100%">
-                                <i class="fa-solid fa-pen"></i>     BUAT PENGAJUAN
+                                <i class="fa-solid fa-pen"></i>     KIRIM
                             </button>
                         </div>
                     </div>

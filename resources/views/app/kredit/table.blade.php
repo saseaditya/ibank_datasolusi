@@ -13,8 +13,8 @@
             <tr class="table">
                 <td class="text-center">{{date("Y-m-d",strtotime($tmp->waktu))}}</td>
                 <td class="text-right">{{$tmp->nama_produk}}</td>
-                <td class="text-right">{{$tmp->plafond}}</td>
-                <td class="text-right">{{$tmp->plafond_setuju}}</td>
+                <td class="text-right">{{number_format($tmp->plafond,0,",",".")}}</td>
+                <td class="text-right">{{number_format($tmp->plafond_setuju,0,",",".")}}</td>
                 <td class="td-actions text-center">
                     @if($tmp->flag == 0)
                     <a href="javascript:void(0)">

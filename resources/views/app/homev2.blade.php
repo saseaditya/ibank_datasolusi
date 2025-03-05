@@ -20,9 +20,19 @@
                 <p class="text-sm">Total Rekening :</p>
                 <p class="text-2xl font-bold">{{$totalRek}} Rekening</p>
             </div>
-            <a href="{{route('viewDashboard')}}">
-                <button class="mt-4 w-full bg-blue-700 text-white py-2 rounded">Daftar Rekening</button>
-            </a>
+            <br>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="{{asset("assets/logo/gambar1.png")}}" alt="Image 1"></div>
+                    <div class="swiper-slide"><img src="{{asset("assets/logo/gambar2.png")}}" alt="Image 2"></div>
+                    <div class="swiper-slide"><img src="{{asset("assets/logo/gambar3.png")}}" alt="Image 3"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+{{--            <a href="{{route('viewDashboard')}}">--}}
+{{--                <button class="mt-4 w-full bg-blue-700 text-white py-2 rounded">Daftar Rekening</button>--}}
+{{--            </a>--}}
+
         </div>
 
         <!-- Menu Icons -->
@@ -126,7 +136,25 @@
 
 @endsection
 @section('additionalCSS')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style type="text/css">
+        .swiper {
+            /*margin-left: -15px;*/
+            margin-bottom: -15px;
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
         .body-menu {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -194,6 +222,17 @@
 @endsection
 @section('additionalJS')
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="text/javascript">
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3000,
+            },
+        });
     </script>
 @endsection

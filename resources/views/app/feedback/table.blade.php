@@ -1,8 +1,8 @@
 <div class="material-datatables">
-    <table id="dataList" class="table dataTables table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+    <table id="dataListFeedback" class="table dataTables table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
         <thead class="bold">
             <th class="text-center disabled-sorting">Tanggal</th>
-            <th class="text-center disabled-sorting">Produk</th>
+            <th class="hide">Produk</th>
             <th class="text-center disabled-sorting">Status</th>
         </thead>
         <!-- {{$no = 1}} -->
@@ -10,7 +10,7 @@
         @foreach($data as $tmp)
             <tr class="table">
                 <td class="text-center">{{date("d M Y",strtotime($tmp->waktu))}}</td>
-                <td class="">{{$tmp->isi}}</td>
+                <td class="hide">{{$tmp->isi}}</td>
                 <td class="td-actions text-center">
                     @if($tmp->flag == 0)
                     <a href="javascript:void(0)">

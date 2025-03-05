@@ -13,10 +13,10 @@
                 <div class="card-header card-header-icon card-header-danger">
                     <div class="card-icon">
                         @if(session('kelamin') == "Pria")
-                            <img src="{{asset("assets/icon/rekening/wanita-removebg-preview.png")}}" >
+                            <img src="{{asset("assets/icon/rekening/laki-removebg-preview.png")}}" >
 {{--                            <i class="fa-solid fa-person fa-2xl"></i>--}}
                         @else
-                            <img src="{{asset("assets/icon/rekening/laki-removebg-preview.png")}}" >
+                            <img src="{{asset("assets/icon/rekening/wanita-removebg-preview.png")}}" >
 {{--                            <i class="fa-solid fa-person-dress fa-2xl"></i>--}}
                         @endif
                     </div>
