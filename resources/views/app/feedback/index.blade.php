@@ -261,7 +261,7 @@
             $('#formKeluhan').attr('action','{{route('CreateFeedback')}}');
         });
 
-        var table = $('#dataList').DataTable();
+        var table = $('#dataListFeedback').DataTable();
 
         $("#btnAddNew").on('click', function () {
             $("#modalKeluhan").modal('show');
@@ -272,6 +272,7 @@
 
         $('#dataListFeedback tbody').on('click', 'tr', function() {
             var data = table.row(this).data();
+            // console.log(data)
             // alert('Anda mengklik baris dengan data: ' + data[0]); // Data pertama dalam baris
             $("#modalKeluhan").modal('show');
             $("#txtDeskripsi").val(data[1]);
