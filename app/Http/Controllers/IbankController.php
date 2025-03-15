@@ -6,7 +6,7 @@ use DB;
 use Input;
 use Redirect;
 use Session;
-use File;
+//use File;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -23,6 +23,7 @@ use Dompdf\Dompdf;
 use PDF;
 use DateTime;
 use Controllers;
+use Illuminate\Support\Facades\File;
 
 class IbankController extends Controller
 {
