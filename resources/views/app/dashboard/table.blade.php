@@ -16,7 +16,7 @@
 {{--                            <th class="text-center ">ID</th>--}}
                             <th class="text-center">No Rekening</th>
                             <th class="text-center">Plafond</th>
-                            <th class="text-center">Bakidebet</th>
+                            <th class="text-center">Saldo Pokok</th>
                             <th class="text-center">Tunggakan</th>
                             <th class="text-center">Lihat</th>
                         </thead>

@@ -5,7 +5,7 @@
     <li class="nav-item {{ ($menuActive == 'home')?'active':'non-active' }} ">
         <a class="nav-link" href="{{route('viewHome')}}">
             <i class="material-icons">dashboard</i>
-            <p> Menu Utama </p>
+            <p> Home </p>
         </a>
     </li>
 

