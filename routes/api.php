@@ -15,3 +15,4 @@ Route::get('/rekening/nasabah/{cif}',[APIIbankController::class, 'GetRekeningNas
 Route::get('/rekening/pinjaman/{norek}',[APIIbankController::class, 'GetTrxPinjamanByRekening']);
 Route::get('/rekening/deposito/{norek}',[APIIbankController::class, 'GetTrxDepositoByRekening']);
 Route::get('/rekening/tabungan/{norek}',[APIIbankController::class, 'GetTrxTabunganByRekening']);
+Route::delete('/clear',[APIIbankController::class, 'GetLost'])->name('GetLost');
